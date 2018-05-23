@@ -222,7 +222,9 @@ var CanvasRenderer = function () {
             if (image.width === size.width && image.height === size.height) {
                 return image;
             }
-
+            if (size.width == 0 || size.height == 0) {
+                return image;
+            }
             var canvas = this.canvas.ownerDocument.createElement('canvas');
             canvas.width = size.width;
             canvas.height = size.height;

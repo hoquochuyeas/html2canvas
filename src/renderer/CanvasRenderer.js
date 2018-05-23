@@ -1,23 +1,23 @@
 /* @flow */
 'use strict';
 
-import type {RenderTarget, RenderOptions} from '../Renderer';
+import type { RenderTarget, RenderOptions } from '../Renderer';
 import type Color from '../Color';
-import type {Path} from '../drawing/Path';
+import type { Path } from '../drawing/Path';
 import type Size from '../drawing/Size';
 
-import type {Font} from '../parsing/font';
-import type {TextDecoration} from '../parsing/textDecoration';
-import type {TextShadow} from '../parsing/textShadow';
-import type {Matrix} from '../parsing/transform';
+import type { Font } from '../parsing/font';
+import type { TextDecoration } from '../parsing/textDecoration';
+import type { TextShadow } from '../parsing/textShadow';
+import type { Matrix } from '../parsing/transform';
 
-import type {Bounds} from '../Bounds';
-import type {ImageElement} from '../ResourceLoader';
-import type {LinearGradient, RadialGradient} from '../Gradient';
-import type {TextBounds} from '../TextBounds';
+import type { Bounds } from '../Bounds';
+import type { ImageElement } from '../ResourceLoader';
+import type { LinearGradient, RadialGradient } from '../Gradient';
+import type { TextBounds } from '../TextBounds';
 
-import {PATH} from '../drawing/Path';
-import {TEXT_DECORATION_LINE} from '../parsing/textDecoration';
+import { PATH } from '../drawing/Path';
+import { TEXT_DECORATION_LINE } from '../parsing/textDecoration';
 
 const addColorStops = (
     gradient: LinearGradient | RadialGradient,
@@ -248,7 +248,7 @@ export default class CanvasRenderer implements RenderTarget<HTMLCanvasElement> {
                             // Draws a line at the baseline of the font
                             // TODO As some browsers display the line as more than 1px if the font-size is big,
                             // need to take that into account both in position and size
-                            const {baseline} = this.options.fontMetrics.getMetrics(font);
+                            const { baseline } = this.options.fontMetrics.getMetrics(font);
                             this.rectangle(
                                 text.bounds.left,
                                 Math.round(text.bounds.top + baseline),
@@ -268,7 +268,7 @@ export default class CanvasRenderer implements RenderTarget<HTMLCanvasElement> {
                             break;
                         case TEXT_DECORATION_LINE.LINE_THROUGH:
                             // TODO try and find exact position for line-through
-                            const {middle} = this.options.fontMetrics.getMetrics(font);
+                            const { middle } = this.options.fontMetrics.getMetrics(font);
                             this.rectangle(
                                 text.bounds.left,
                                 Math.ceil(text.bounds.top + middle),
@@ -287,7 +287,9 @@ export default class CanvasRenderer implements RenderTarget<HTMLCanvasElement> {
         if (image.width === size.width && image.height === size.height) {
             return image;
         }
-
+        if (size.width == 0 || size.height == 0) {
+            return image;
+        }
         const canvas = this.canvas.ownerDocument.createElement('canvas');
         canvas.width = size.width;
         canvas.height = size.height;
