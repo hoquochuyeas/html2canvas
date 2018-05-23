@@ -1,10 +1,10 @@
 /* @flow */
 'use strict';
-import type {Path} from '../drawing/Path';
-import type {BoundCurves} from '../Bounds';
-import type ResourceLoader, {ImageElement} from '../ResourceLoader';
-import type {Border} from './border';
-import type {Padding} from './padding';
+import type { Path } from '../drawing/Path';
+import type { BoundCurves } from '../Bounds';
+import type ResourceLoader, { ImageElement } from '../ResourceLoader';
+import type { Border } from './border';
+import type { Padding } from './padding';
 
 import Color from '../Color';
 import Length from '../Length';
@@ -16,7 +16,7 @@ import {
     calculatePaddingBox,
     Bounds
 } from '../Bounds';
-import {PADDING_SIDES} from './padding';
+import { PADDING_SIDES } from './padding';
 
 export type Background = {
     backgroundImage: Array<BackgroundImage>,
@@ -93,8 +93,8 @@ export const calculateBackgroundSize = (
     image: ImageElement,
     bounds: Bounds
 ): Size => {
-    let width = 0;
-    let height = 0;
+    let width = image.width; //HuyHQ fix bug width height be 0
+    let height = image.height; //HuyHQ fix bug width height be 0
     const size = backgroundImage.size;
     if (size[0].size === BACKGROUND_SIZE.CONTAIN || size[0].size === BACKGROUND_SIZE.COVER) {
         const targetRatio = bounds.width / bounds.height;
